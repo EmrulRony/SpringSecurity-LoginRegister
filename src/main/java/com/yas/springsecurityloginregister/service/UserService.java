@@ -2,6 +2,7 @@ package com.yas.springsecurityloginregister.service;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 import com.yas.springsecurityloginregister.Entity.Role;
 import com.yas.springsecurityloginregister.Entity.User;
@@ -19,6 +20,8 @@ public class UserService{
     private UserRepository userDao;
     @Autowired
     private RoleRepository roleDao;
+    @Autowired
+    BCryptPasswordEncoder passwordEncoder;
     //private BCryptPasswordEncoder bCryptPasswordEncoder;
     // @Autowired
     // private NoOpPasswordEncoder noOpPasswordEncoder;
@@ -36,11 +39,15 @@ public class UserService{
 
     public void saveUser(User user){
         // user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setPassword(user.getPassword());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActive(true);
         Role userRole = roleDao.findByName("ADMIN");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userDao.save(user);
+    }
+
+    public List<User> findAllUser(){
+        return userDao.findAll();   
     }
     
 }

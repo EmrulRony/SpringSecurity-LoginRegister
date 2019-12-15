@@ -1,0 +1,57 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Registration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{css/login-register-form.css}">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <form class="form-signup" th:action="@{/registration}" method="POST" autocomplete="off" th:object="${user}">
+            <div class="text-center mb-4">
+                <h1 class="h3 mb-3 font-weight-normal">Registration Form</h1>
+            </div>
+
+            <div> <label  th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="validation-message"></label> </div>
+            <div class="form-label-group">
+               
+                <input id="inputName" class="form-control" placeholder="Name" th:field="*{name}">
+                <label for="inputEmail">Name</label>
+            </div>
+
+            <div class="form-label-group">
+                <input type="text" id="inputLastName" class="form-control" placeholder="Last Name" th:field="*{lastName}">
+                <label for="inputEmail">Last Name</label>
+            </div>
+
+            <div><label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="validation-message"></label></div>
+            <div class="form-label-group">
+                <input type="email" id="inputEmail" autocomplete="off" class="form-control" placeholder="Email address" th:field="*{email}">
+                <label for="inputEmail">Email address</label>
+            </div>
+
+            <div> <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="validation-message"></label></div>
+            <div class="form-label-group">
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password">
+                <label for="inputPassword">Password</label>
+            </div>
+
+            <!-- <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" value="true" name="remember-me"> Remember me
+                </label>
+            </div> -->
+            
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Register User</button>
+
+            <h2><span class="text-success" th:utext="${successMessage}"></span></h2>
+
+            <p>Already have an account? <a th:href="@{/login}">login</a></p>
+        </form>
+        
+    </div> 
+</body>
+
+</html>

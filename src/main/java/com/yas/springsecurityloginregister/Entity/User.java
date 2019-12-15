@@ -38,7 +38,7 @@ public class User implements UserDetails {
     @NotEmpty(message = "Please provide a name")
     private String name;
     private String lastName;
-    private boolean isActive;
+    private boolean isActive=true;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
